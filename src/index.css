@@ -1,0 +1,143 @@
+:root {
+  color-scheme: light dark;
+}
+
+* {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+h1 {
+  text-align: center;
+  padding: 30px 0 ;
+}
+
+.select-language {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.select-language select {
+  flex: 1;
+  width: 100px;
+  text-overflow: ellipsis;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: 1px solid #353535;
+  font-weight: bold;
+  cursor: pointer;
+  transition: outline 0.1s linear;
+
+  &:focus {
+    outline: 2px solid #0ED0E0;
+  }
+}
+
+.select-language select, .select-language select option {
+  font-size: 1rem;
+}
+
+.select-language button {
+  width: 50px;
+  padding: 10px;
+}
+
+/* .select-language button, .from-text button { */
+button:has(svg) {
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  color: #353535;
+  cursor: pointer;
+
+  &:hover {
+    color: light-dark(black, white);
+  }
+}
+
+.translate-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 50px;
+}
+
+.translate-content div {
+  flex: 1;
+}
+
+.translate-content div textarea {
+  width: 100%;
+  padding: 10px;
+  padding-bottom: 50px;
+  border: none;
+  font-size: 1.5rem;
+  resize: none;
+  field-sizing: content;
+  min-height: 200px;
+  border-radius: 8px;
+  outline: 1px solid #353535;
+  transition: outline 0.1s linear;
+
+  &:focus {
+    outline: 2px solid #0ED0E0;
+  }
+}
+
+.translate-content textarea:disabled {
+  outline: none;
+}
+
+/* BOTONES DE INTERACCIÓN */
+.from-text, .result {
+  position: relative;
+}
+
+.from-text > button {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.translate-content .from-text > textarea {
+  padding-right: 40px;
+}
+
+.result > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 10px;
+  display: flex;
+  gap: 15px;
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 750px) {
+  .translate-content {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .translate-content div {
+    width: 100%;
+  }
+}
