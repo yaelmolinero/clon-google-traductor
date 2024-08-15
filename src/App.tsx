@@ -22,18 +22,17 @@ function App() {
   useEffect(() => {
     if (debounce === "") return;
     
-    fetch("/.netlify/functions/translate", {
+    fetch("/.netlify/functions/translate",{
       method: "POST",
       body: JSON.stringify({
         text: debounce,
-        fromLanguage: "es",
-        toLanguage: "en-US"
+        fromLanguage,
+        toLanguage 
       })
     })
       .then(response => response.json())
       .then(data => setResult(data))
       .catch(() => setResult("Error"));
-    // setResult(debounce);
   }, [debounce, fromLanguage, toLanguage])
 
   return (
