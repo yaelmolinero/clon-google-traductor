@@ -1,20 +1,25 @@
-import { SectionTypes } from "../types.d";
+import { SectionTypes } from '@/types.d';
 
 interface Props {
-  type: SectionTypes
-  loading?: boolean
-  value: string
-  onChange: (text: string) => void
+  type: SectionTypes;
+  loading?: boolean;
+  value: string;
+  onChange: (text: string) => void;
 }
 
-function getPlaceholder({ type, loading }: { type: SectionTypes, loading?: boolean }) {
-  if (type === SectionTypes.From) return "Introducir texto";
-  if (loading === true) return "Cargando...";
-  return "Traducción";
+function getPlaceholder({
+  type,
+  loading,
+}: {
+  type: SectionTypes;
+  loading?: boolean;
+}) {
+  if (type === SectionTypes.From) return 'Introducir texto';
+  if (loading === true) return 'Cargando...';
+  return 'Traducción';
 }
 
 function TextArea({ type, value, loading, onChange }: Props) {
-
   function handleChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
     onChange(event.target.value);
   }
