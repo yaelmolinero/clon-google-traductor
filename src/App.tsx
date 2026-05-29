@@ -48,68 +48,65 @@ function App() {
   }, [debounce, fromLanguage, toLanguage]);
 
   return (
-    <>
-      <h1>Clon Google Traductor</h1>
-      <form className='form'>
-        <div className='select-language'>
-          <LanguageSelector
-            type={SectionTypes.From}
-            onChange={setFromLanguage}
-            value={fromLanguage}
-          />
-          <button
-            type='button'
-            onClick={interchangeLanguage}
-            aria-label='Intercambiar Idiomas'
-          >
-            <ArrowLeftRight />
-          </button>
-          <LanguageSelector
-            type={SectionTypes.To}
-            onChange={setToLanguage}
-            value={toLanguage}
-          />
-        </div>
+    <form className='form'>
+      <div className='select-language'>
+        <LanguageSelector
+          type={SectionTypes.From}
+          onChange={setFromLanguage}
+          value={fromLanguage}
+        />
+        <button
+          type='button'
+          onClick={interchangeLanguage}
+          aria-label='Intercambiar Idiomas'
+        >
+          <ArrowLeftRight />
+        </button>
+        <LanguageSelector
+          type={SectionTypes.To}
+          onChange={setToLanguage}
+          value={toLanguage}
+        />
+      </div>
 
-        <div className='translate-content'>
-          <div className='from-text'>
-            <TextArea
-              type={SectionTypes.From}
-              onChange={setFromText}
-              value={fromText}
-            />
-            {fromText !== '' && (
+      <div className='translate-content'>
+        <div className='from-text'>
+          <TextArea
+            type={SectionTypes.From}
+            onChange={setFromText}
+            value={fromText}
+          />
+          {fromText !== '' && (
+            <button
+              type='button'
+              onClick={clearFromText}
+              aria-label='Limpiar texto del usuario'
+            >
+              <Clear />
+            </button>
+          )}
+        </div>
+        <div className='result'>
+          <TextArea
+            type={SectionTypes.To}
+            onChange={setResult}
+            value={result}
+            loading={loading}
+          />
+          {result !== '' && result !== 'Error' && (
+            <div className='buttons'>
               <button
                 type='button'
-                onClick={clearFromText}
-                aria-label='Limpiar texto del usuario'
+                onClick={copyResult}
+                aria-label='Copia el resultado en el portapapeles'
               >
-                <Clear />
+                <Copy />
               </button>
-            )}
-          </div>
-          <div className='result'>
-            <TextArea
-              type={SectionTypes.To}
-              onChange={setResult}
-              value={result}
-              loading={loading}
-            />
-            {result !== '' && result !== 'Error' && (
-              <div className='buttons'>
-                <button
-                  type='button'
-                  onClick={copyResult}
-                  aria-label='Copia el resultado en el portapapeles'
-                >
-                  <Copy />
-                </button>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
-      </form>
-    </>
+      </div>
+    </form>
   );
 }
 
