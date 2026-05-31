@@ -8,12 +8,14 @@ export default async function (req) {
   const data = await req.json();
   const { text, fromLanguage, toLanguage } = data;
   const handlFromLanguage = fromLanguage === 'auto' ? null : fromLanguage;
+  const handleTargetLanguage =
+    toLanguage === 'en' ? 'en-US' : toLanguage === 'pt' ? 'pt-PT' : toLanguage;
 
   try {
     const response = await translator.translateText(
       text,
       handlFromLanguage,
-      toLanguage
+      handleTargetLanguage
     );
     const result = JSON.stringify(response.text);
     return new Response(result);
