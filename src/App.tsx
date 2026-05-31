@@ -45,7 +45,7 @@ function App() {
       .then(response => response.json())
       .then(data => setResult(data))
       .catch(() => setResult('Error'));
-  }, [debounce, fromLanguage, toLanguage]);
+  }, [debounce, fromLanguage, toLanguage, setResult]);
 
   return (
     <form className='form'>
@@ -59,6 +59,7 @@ function App() {
           type='button'
           onClick={interchangeLanguage}
           aria-label='Intercambiar Idiomas'
+          disabled={fromLanguage === 'auto'}
         >
           <ArrowLeftRight />
         </button>

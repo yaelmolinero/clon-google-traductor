@@ -1,5 +1,6 @@
 export const AUTO_LANGUAGE = 'auto';
-export const SOURCE_LANGUAGES = {
+
+export const SUPPORTED_LAGUAGES = {
   de: 'Alemán',
   en: 'Inglés',
   es: 'Español',
@@ -15,24 +16,6 @@ export const SOURCE_LANGUAGES = {
   zh: 'Chino',
 };
 
-export const TARGET_LANGUAGES = {
-  de: 'Alemán',
-  'en-GB': 'Inglés (Britanico)',
-  'en-US': 'Inglés (Americano)',
-  es: 'Español',
-  fr: 'Frances',
-  it: 'Italiano',
-  ja: 'Japonés',
-  ko: 'Koreano',
-  nl: 'Holandés',
-  'pt-BR': 'Portuges (Brazil)',
-  'pt-PT': 'Portuges (Portugal)',
-  ru: 'Ruso',
-  sl: 'Sloveno',
-  uk: 'Ukranio',
-  zh: 'Chino',
-};
-
 export const VOICE_FOR_LANGUAGE = {
   en: 'en-GB',
   es: 'es-MX',
@@ -41,3 +24,5 @@ export const VOICE_FOR_LANGUAGE = {
   ja: 'ja-JP',
   ru: 'ru-RU',
 };
+
+export const LANGUAGE_SELECTION = 'language-selection';

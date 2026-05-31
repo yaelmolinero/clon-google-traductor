@@ -1,4 +1,4 @@
-import { SOURCE_LANGUAGES, TARGET_LANGUAGES } from '@/constants.ts';
+import { SUPPORTED_LAGUAGES } from '@/constants.ts';
 import { type FromLanguage, type ToLanguage, SectionTypes } from '@/types.d';
 
 type Props =
@@ -17,17 +17,11 @@ function LanguageSelector({ type, value, onChange: changeLanguage }: Props) {
     <select name='fromLanguage' onChange={handleChange} value={value}>
       { type === SectionTypes.From && <option value='auto'>Detectar idioma</option> }
 
-      { type === SectionTypes.From
-        ?
-        Object.entries(SOURCE_LANGUAGES).map(([key, value]) => (
-          <option value={key} key={key}>{ value }</option>
-        ))
-        :
-        Object.entries(TARGET_LANGUAGES).map(([key, value]) => (
-          <option value={key} key={key}>{ value }</option>
-        ))
-
-      }
+      {Object.entries(SUPPORTED_LAGUAGES).map(([key, value]) => (
+        <option value={key} key={`${type}-${key}`}>
+          { value }
+        </option>
+      ))}
     </select>
   );
 }

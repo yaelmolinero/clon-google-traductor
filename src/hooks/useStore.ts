@@ -1,10 +1,28 @@
 import { useReducer } from 'react';
-import { AUTO_LANGUAGE } from '@/constants.ts';
-import { type State, type Action, FromLanguage, ToLanguage } from '@/types.d';
+import { AUTO_LANGUAGE, LANGUAGE_SELECTION } from '@/constants.ts';
+import type {
+  State,
+  Action,
+  FromLanguage,
+  ToLanguage,
+  LanguageSelection,
+} from '@/types.d';
 
+function getLocalStorageState(): LanguageSelection {
+  const state = localStorage.getItem(LANGUAGE_SELECTION);
+  if (!state) return { fromLanguage: 'auto', toLanguage: 'en' };
+
+  return JSON.parse(state) as LanguageSelection;
+}
+
+function setLocalStorageState(data: LanguageSelection) {
+  localStorage.setItem(LANGUAGE_SELECTION, JSON.stringify(data));
+}
+
+const { fromLanguage, toLanguage } = getLocalStorageState();
 const initialState: State = {
-  fromLanguage: 'auto',
-  toLanguage: 'en-US',
+  fromLanguage,
+  toLanguage,
   fromText: '',
   result: '',
   loading: false,
@@ -21,33 +39,15 @@ function reducer(state: State, action: Action): State {
     )
       return state;
 
-    const languageMap: any = {
-      en: 'en-US',
-      'en-US': 'en',
-      'en-GB': 'en',
-      pt: 'pt-BR',
-      'pt-BR': 'pt',
-      'pt-PT': 'pt',
-    };
-
-    if (state.fromLanguage === languageMap[state.toLanguage]) return state;
-
-    const handleLanguages = {
-      fromLanguage: state.fromLanguage,
-      toLanguage: state.toLanguage,
-    };
-
-    if (state.fromLanguage in languageMap) {
-      handleLanguages.fromLanguage = languageMap[state.fromLanguage];
-    }
-
-    if (state.toLanguage in languageMap) {
-      handleLanguages.toLanguage = languageMap[state.toLanguage];
-    }
+    const { fromLanguage, toLanguage } = state;
+    setLocalStorageState({
+      fromLanguage: toLanguage,
+      toLanguage: fromLanguage,
+    });
 
     return {
-      fromLanguage: handleLanguages.toLanguage as FromLanguage,
-      toLanguage: handleLanguages.fromLanguage as ToLanguage,
+      fromLanguage: toLanguage,
+      toLanguage: fromLanguage,
       fromText: state.result,
       result: state.fromText,
       loading: false,
@@ -56,6 +56,10 @@ function reducer(state: State, action: Action): State {
 
   if (type === 'SET_FROM_LANGUAGE') {
     if (state.fromLanguage === action.payload) return state;
+    setLocalStorageState({
+      fromLanguage: action.payload,
+      toLanguage: state.toLanguage,
+    });
 
     return {
       ...state,
@@ -67,6 +71,10 @@ function reducer(state: State, action: Action): State {
     if (state.toLanguage === action.payload) return state;
 
     const loading = state.fromText !== '';
+    setLocalStorageState({
+      fromLanguage: state.fromLanguage,
+      toLanguage: action.payload,
+    });
 
     return {
       ...state,

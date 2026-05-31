@@ -1,14 +1,10 @@
-import {
-  type SOURCE_LANGUAGES,
-  type TARGET_LANGUAGES,
-  type AUTO_LANGUAGE,
-} from '@/constants.ts';
+import { type SUPPORTED_LAGUAGES, type AUTO_LANGUAGE } from '@/constants.ts';
 
-export type SourceLanguage = keyof typeof SOURCE_LANGUAGES;
+export type SourceLanguage = keyof typeof SUPPORTED_LAGUAGES;
 export type AutoLanguage = typeof AUTO_LANGUAGE;
 
 export type FromLanguage = SourceLanguage | AutoLanguage;
-export type ToLanguage = keyof typeof TARGET_LANGUAGES;
+export type ToLanguage = SourceLanguage;
 
 export interface State {
   fromLanguage: FromLanguage;
@@ -28,4 +24,9 @@ export type Action =
 export enum SectionTypes {
   From = 'from',
   To = 'to',
+}
+
+export interface LanguageSelection {
+  fromLanguage: FromLanguage;
+  toLanguage: ToLanguage;
 }
