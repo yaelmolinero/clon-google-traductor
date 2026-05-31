@@ -17,12 +17,19 @@ export const SUPPORTED_LAGUAGES = {
 };
 
 export const VOICE_FOR_LANGUAGE = {
+  de: 'de-DE',
   en: 'en-GB',
   es: 'es-MX',
-  pt: 'pt-PT',
   fr: 'fr-FR',
+  it: 'it-IT',
   ja: 'ja-JP',
+  ko: 'ko-KR',
+  nl: 'nl-NL',
+  pt: 'pt-PT',
   ru: 'ru-RU',
+  sl: 'sl-SL',
+  uk: 'uk-UA',
+  zh: 'zh-CN',
 };
 
 export const LANGUAGE_SELECTION = 'language-selection';

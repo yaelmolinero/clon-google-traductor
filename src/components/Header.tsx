@@ -1,7 +1,7 @@
 function Header() {
   return (
     <div className='header'>
-      <h1>Clon Traductor</h1>
+      <h1>Clon Google Traductor</h1>
       <a href='https://github.com/yaelmolinero' target='_blank'>
         <div className='github-avatar'>
           <img

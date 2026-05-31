@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useCallback } from 'react';
 import { AUTO_LANGUAGE, LANGUAGE_SELECTION } from '@/constants.ts';
 import type {
   State,
@@ -126,9 +126,9 @@ export function useStore() {
     dispatch({ type: 'SET_FROM_TEXT', payload });
   }
 
-  function setResult(payload: string) {
+  const setResult = useCallback((payload: string) => {
     dispatch({ type: 'SET_RESULT', payload });
-  }
+  }, []);
 
   return {
     fromLanguage,

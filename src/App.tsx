@@ -4,7 +4,8 @@ import { useDebounce } from '@/hooks/useDebounce.ts';
 
 import LanguageSelector from '@/components/LanguageSelector.tsx';
 import TextArea from '@/components/TextArea.tsx';
-import { ArrowLeftRight, Clear, Copy } from '@/components/Icons.tsx';
+import { ArrowLeftRight, Clear, Copy, Volume } from '@/components/Icons.tsx';
+import { VOICE_FOR_LANGUAGE } from '@/constants.ts';
 
 import { SectionTypes } from '@/types.d';
 
@@ -29,6 +30,24 @@ function App() {
 
   function copyResult() {
     navigator.clipboard.writeText(result);
+  }
+
+  function handleSpeak() {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+      return;
+    }
+
+    const utterance = new SpeechSynthesisUtterance(result);
+    utterance.lang = VOICE_FOR_LANGUAGE[toLanguage];
+    utterance.rate = 0.9;
+    utterance.onstart = () =>
+      document.getElementById('speaker-button')?.classList.add('speaking');
+    utterance.onerror = () =>
+      document.getElementById('speaker-button')?.classList.remove('speaking');
+    utterance.onend = () =>
+      document.getElementById('speaker-button')?.classList.remove('speaking');
+    speechSynthesis.speak(utterance);
   }
 
   useEffect(() => {
@@ -102,6 +121,14 @@ function App() {
                 aria-label='Copia el resultado en el portapapeles'
               >
                 <Copy />
+              </button>
+              <button
+                id='speaker-button'
+                type='button'
+                onClick={handleSpeak}
+                aria-label='Habla el texto resultado de la traducción'
+              >
+                <Volume />
               </button>
             </div>
           )}
